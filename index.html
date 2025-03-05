@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Job Portal</title>
+    <style>
+        /* Reset and Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #F5F5F5;
+            color: #424242;
+            line-height: 1.6;
+        }
+
+        /* Color Scheme */
+        :root {
+            --primary-color: #1A237E;
+            --secondary-color: #2E7D32;
+            --accent-color: #FF6F61;
+            --teal-color: #008080;
+            --light-grey: #F5F5F5;
+            --dark-grey: #424242;
+            --white: #FFFFFF;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 1rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            width: 200px;
+        }
+
+        .search-bar button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: var(--teal-color);
+        }
+
+        /* Hero Section Styles */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .job-card {
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-location, .job-type {
+            font-size: 0.9rem;
+            color: var(--dark-grey);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-description {
+            font-size: 1rem;
+            color: var(--dark-grey);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .apply-button {
+            background-color: var(--teal-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: start;
+        }
+
+        .apply-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links li {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons a {
+            color: var(--white);
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+            }
+
+            .search-bar {
+                margin-top: 1rem;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            .nav-links li {
+                margin: 0.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">Indian Job Portal</a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Companies</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search jobs..." aria-label="Search jobs">
+            <button type="button">Search</button>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Find Your Dream Job in India</h1>
+            <p>Explore thousands of job opportunities across various industries and locations.</p>
+        </div>
+    </section>
+
+    <main>
+        <h2 class="section-title">Featured Jobs</h2>
+        <div class="job-listings">
+            <div class="job-card">
+                <h3 class="job-title">Software Engineer</h3>
+                <p class="company-name">Tech Solutions Pvt. Ltd.</p>
+                <p class="job-location">Bangalore, Karnataka</p>
+                <p class="job-type">Full-time</p>
+                <p class="job-description">We are looking for a skilled software engineer to join our dynamic team...</p>
+                <button class="apply-button">Apply Now</button>
+            </div>
+            <div class="job-card">
+                <h3 class="job-title">Data Analyst</h3>
+                <p class="company-name">Data Insights Inc.</p>
+                <p class="job-location">Mumbai, Maharashtra</p>
+                <p class="job-type">Full-time</p>
+                <p class="job-description">Join our team as a data analyst and help us make data-driven decisions...</p>
+                <button class="apply-button">Apply Now</button>
+            </div>
+            <div class="job-card">
+                <h3 class="job-title">Marketing Specialist</h3>
+                <p class="company-name">Brand Boosters</p>
+                <p class="job-location">Delhi, NCR</p>
+                <p class="job-type">Part-time</p>
+                <p class="job-description">We are seeking a creative marketing specialist to enhance our brand presence...</p>
+                <button class="apply-button">Apply Now</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">FAQ</a></li>
+        </ul>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2024 Indian Job Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Placeholder for JavaScript functionality
+    </script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+</body>
+</html>
